@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "dumb-lang-test": {
+      "commandName": "Project",
+      "commandLineArgs": "parse whenz skip; halt; randm; prity; shftr; rstrt"
+    }
+  }
+}

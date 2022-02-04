@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace dumb_lang_test
 {
@@ -16,16 +18,39 @@ namespace dumb_lang_test
         private static byte[] memory = new byte[MEMORY_SIZE];
         private static int cycles = 0;
         private static readonly int max_cycles = 500000;
+        private static string program = "";
 
         static void Main(string[] args)
         {
+            switch (args[0].ToLower())
+            {
+                case "parse":
+                    {
+                        args = args.Skip(1).ToArray();
+                        program = string.Join(' ', args);
+                        break;
+                    }
+                case "file":
+                    {
+                        args = args.Skip(1).ToArray();
+                        string filename = string.Join(' ', args);
+                        program = File.ReadAllText(filename);
+
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+
             int _;
             for (_ = 0; _ < memory.Length; _++)
             {
                 memory[_] = 0x00;
             }
 
-            List<Interfaces.IBasicInstruction> instructions = StringParser.ParseString(@"bumpd;swapr;bumpu;shftr;andl");
+            List<Interfaces.IBasicInstruction> instructions = StringParser.ParseString(program);
 
             DateTime _start = DateTime.Now;
 
@@ -46,14 +71,10 @@ namespace dumb_lang_test
         {
             Program.memory[MemoryPointer] = memory;
         }
+
         public static void SetMemorySpecial(byte memory)
         {
             Program.memory[special_index] = memory;
-        }
-
-        public static void SetMemoryRightOf(byte memory)
-        {
-            Program.memory[MemoryPointer] = memory;
         }
 
         public static void ShiftMemory(byte shift)
@@ -71,7 +92,7 @@ namespace dumb_lang_test
 
         public static void PrintFullMem()
         {
-            System.Console.WriteLine("\nMemory readout ({0:D} bytes)", MEMORY_SIZE);
+            System.Console.WriteLine("Memory readout ({0:D} bytes)", MEMORY_SIZE);
 
             var default_fcolor = Console.ForegroundColor;
             var default_bcolor = Console.BackgroundColor;
