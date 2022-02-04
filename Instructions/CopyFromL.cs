@@ -10,7 +10,7 @@ namespace dumb_lang_test.Instructions
     {
         public void Execute()
         {
-            Program.SetMemory(Program.GetMemoryFromLeft());
+            Program.SetMemory(Program.GetMemoryLeftOf());
         }
     }
 }
