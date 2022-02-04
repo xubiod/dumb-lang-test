@@ -82,7 +82,7 @@ namespace dumb_lang_test
             {"xorr", typeof(Instructions.BitWiseXorR) },              {"^", typeof(Instructions.BitWiseXorR) },
             {"bumpd", typeof(Instructions.BumpDown) },                {"j", typeof(Instructions.BumpDown) },
             {"bumpu", typeof(Instructions.BumpUp) },                  {"k", typeof(Instructions.BumpUp) },
-            {"cpytr", typeof(Instructions.CopyToR) },
+            {"cpyfl", typeof(Instructions.CopyFromL) },
             {"noop", typeof(Instructions.Noop) },                     {"-", typeof(Instructions.Noop) },
             {"prity", typeof(Instructions.Parity) },                  {"%", typeof(Instructions.Parity) },
             {"randm", typeof(Instructions.WriteRandom) },                  {"?", typeof(Instructions.WriteRandom) },

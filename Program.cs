@@ -59,6 +59,8 @@ namespace dumb_lang_test
 
         public static byte GetMemoryRightOf() => memory[(MemoryPointer + 1) % MEMORY_SIZE];
 
+        public static byte GetMemoryLeftOf() => memory[MemoryPointer - 1  == -1 ? 255 : MemoryPointer - 1];
+
         public static void PrintFullMem()
         {
             System.Console.WriteLine("\nMemory readout ({0:D} bytes)", MEMORY_SIZE);

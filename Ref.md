@@ -21,8 +21,8 @@ Sets value at `mp` to a random number from 0x00 to 0xFF
 #### WritePointer `wrptr`, `v`
 Sets value at `mp` to `mp`
 
-#### CopyToR `cpytr`
-Sets value 1 right of `mp` to value of `mp`
+#### CopyFromL `cpyfl`
+Sets value of `mp` to value 1 left of `mp`
 
 #### BitWiseXorR `xorr`, `^`
 Performs `[value @ mp] = [value @ mp] ^ [value @ mp + 1]`

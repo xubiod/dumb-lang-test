@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace dumb_lang_test.Instructions
 {
-    class CopyToR : Interfaces.IBasicInstruction
+    class CopyFromL : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.SetMemoryRightOf(Program.GetMemory());
+            Program.SetMemory(Program.GetMemoryFromLeft());
         }
     }
 }
