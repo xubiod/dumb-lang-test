@@ -95,7 +95,7 @@ Checks value at `mp` if it's zero. Runs the basic instruction given if check com
 Usage: `whenz <basic-instruction>`
 
 #### InTopHalf `whnth`, `t`
-Checks if `mp` is in the top half of memory (`mp` > 0x80). Runs the basic instruction given if check completes
+Checks if `mp` is in the top half of memory (`mp` < 0x80). Runs the basic instruction given if check completes
 
 Usage: `whnth <basic-instruction>`
 
