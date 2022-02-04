@@ -22,6 +22,10 @@ namespace dumb_lang_test
 
             string cleaned_line;
             string opc;
+            int unrecognized = 0;
+
+            DateTime _started = DateTime.Now;
+
             foreach (string line in program.Split('\n',';'))
             {
                 cleaned_line = Regex.Replace(line, @"[\s\r]+(\/\/.*)", "").Trim();
@@ -84,7 +88,16 @@ namespace dumb_lang_test
 
                     completed_instructions.Add(new_instr);
                 }
+                else
+                {
+                    System.Console.WriteLine("Parse: {0} unrecognized, ignoring", opc);
+                    unrecognized++;
+                }
             }
+
+            TimeSpan parse_time = DateTime.Now - _started;
+
+            System.Console.WriteLine("Parse: Complete, {0} instructions loaded, {1} unrecognized skipped, {2} ticks ({3}ms)", completed_instructions.Count, unrecognized, parse_time.Ticks, parse_time.TotalMilliseconds);
 
             return completed_instructions;
         }
