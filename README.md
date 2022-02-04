@@ -2,6 +2,7 @@
 A quick attempt to make an esolang and C# parser.
 
 ## Design Decisions
+- All instructions are made with both broad and narrow use cases in mind
 - All instruction names in longer form are 5 characters or less
 - All basic instructions have no given arguments
 - All non-basic instructions cannot be used in other non-basic instructions
