@@ -93,3 +93,8 @@ Groups together two or three instructions to one line, at the cost of using 3 cy
 Skip will skip all instructions in the group
 
 Usage: `group <basic-instruction>,<basic-instruction>[,<basic-instruction>]`
+
+#### JumpOffset `jumpo`
+Moves instruction pointer by a given offset. Interpreted as a **signed** byte
+
+Usage: `jumpo <byte>`
