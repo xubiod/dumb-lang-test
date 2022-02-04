@@ -41,6 +41,16 @@ Checks parity of value at `mp`.
 If odd, value at `mp` is set to 0xFF.
 If even, value at `mp` is set to 0x00
 
+#### ReplaceToSpecial `rtspl`
+Copys value at `mp` to memory location 0xFF
+
+Mainly for pseudo instructions, but still accessible
+
+#### ReplaceFromSpecial `rfspl`
+Copys value at memory location 0xFF to `mp`
+
+Mainly for pseudo instructions, but still accessible
+
 ### Pointer Instructions
 Note these are considered basic instructions
 
@@ -103,3 +113,6 @@ Usage: `jmpof <sbyte>`
 Moves instruction pointer by a given offset multiplied by 128. Uses a **signed** byte
 
 Usage: `jmpoc <sbyte>`
+
+## Other
+Pseudo instruction reference [here](PSEUDO_REF.md).

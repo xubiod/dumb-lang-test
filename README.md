@@ -16,4 +16,4 @@ A quick attempt to make an esolang and C# parser.
 - Loops are infinite, only breakable using a conditional with the `skip` instruction
 
 
-Instruction reference [here](Ref.md).
+Instruction reference [here](REFERENCE.md), pseudo instruction reference [here](PSEUDO_REF.md).
