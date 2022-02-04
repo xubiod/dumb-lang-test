@@ -48,10 +48,10 @@ Note these are considered basic instructions
 Sets `mp` to 0
 
 #### ShiftL `shftl`, `<`
-Moves `mp` over to the element on the right. Will wrap around to zero if `mp` was at 0xFF
+Moves `mp` over to the element on the left. Will wrap around to 0xFF if `mp` was at zero
 
 #### ShiftR `shftr`, `>`
-Moves `mp` over to the element on the left. Will wrap around to 0xFF if `mp` was at zero
+Moves `mp` over to the element on the right. Will wrap around to zero if `mp` was at 0xFF
 
 #### PeekJump `pkjmp`
 Reads value at `mp` and sets `mp` to read value
