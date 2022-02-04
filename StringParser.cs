@@ -32,15 +32,15 @@ namespace dumb_lang_test
 
                     string[] args = cleaned_line.Split(' ')[1].Split(',');
 
-                    if (new_instr.GetType() == typeof(InstructionBasicOnZero) && args.Length > 0)
+                    if (new_instr.GetType() == typeof(Instructions.OnZero) && args.Length > 0)
                     {
-                        ((InstructionBasicOnZero)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
+                        ((Instructions.OnZero)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
                     }
-                    else if (new_instr.GetType() == typeof(InstructionOnTopHalf) && args.Length > 0)
+                    else if (new_instr.GetType() == typeof(Instructions.InTopHalf) && args.Length > 0)
                     {
-                        ((InstructionOnTopHalf)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
+                        ((Instructions.InTopHalf)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
                     }
-                    else if (new_instr.GetType() == typeof(InstructionAddi))
+                    else if (new_instr.GetType() == typeof(Instructions.Addi))
                     {
                         List<byte> nums = new();
 
@@ -52,13 +52,13 @@ namespace dumb_lang_test
                             }
                         }
 
-                        ((InstructionAddi)new_instr).FillParameters(nums);
+                        ((Instructions.Addi)new_instr).FillParameters(nums);
                     }
-                    else if (new_instr.GetType() == typeof(InstructionGroup) && args.Length > 1 && args.Length < 4)
+                    else if (new_instr.GetType() == typeof(Instructions.Group) && args.Length > 1 && args.Length < 4)
                     {
                         for (int _ = 0; _ < args.Length; _++)
                         {
-                            ((InstructionGroup)new_instr).AddParameter((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[_]]));
+                            ((Instructions.Group)new_instr).AddParameter((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[_]]));
                         }
                     }
 
@@ -71,34 +71,34 @@ namespace dumb_lang_test
 
         static readonly Dictionary<string, Type> str_basic = new()
         {
-            {"pkjmp", typeof(Pointer.PointerInstructionPeekJump) }, // {"", typeof(Pointer.PointerInstructionPeekJump) },
-            {"reset", typeof(Pointer.PointerInstructionReset) },    {"0", typeof(Pointer.PointerInstructionReset) },
-            {"shftl", typeof(Pointer.PointerInstructionShiftL) },   {"<", typeof(Pointer.PointerInstructionShiftL) },
-            {"shftr", typeof(Pointer.PointerInstructionShiftR) },   {">", typeof(Pointer.PointerInstructionShiftR) },
+            {"pkjmp", typeof(Instructions.Pointer.PeekJump) }, // {"", typeof(Pointer.PointerInstructionPeekJump) },
+            {"reset", typeof(Instructions.Pointer.Reset) },    {"0", typeof(Instructions.Pointer.Reset) },
+            {"shftl", typeof(Instructions.Pointer.ShiftLeft) },   {"<", typeof(Instructions.Pointer.ShiftLeft) },
+            {"shftr", typeof(Instructions.Pointer.ShiftRight) },   {">", typeof(Instructions.Pointer.ShiftRight) },
 
-            {"andr", typeof(InstructionBitWiseAndR) },              {"&", typeof(InstructionBitWiseAndR) },
-            {"compl", typeof(InstructionBitWiseComplement) },       {"~", typeof(InstructionBitWiseComplement) },
-            {"orr", typeof(InstructionBitWiseOrR) },                {"|", typeof(InstructionBitWiseOrR) },
-            {"xorr", typeof(InstructionBitWiseXorR) },              {"^", typeof(InstructionBitWiseXorR) },
-            {"bumpd", typeof(InstructionBumpDown) },                {"j", typeof(InstructionBumpDown) },
-            {"bumpu", typeof(InstructionBumpUp) },                  {"k", typeof(InstructionBumpUp) },
-            {"cpytr", typeof(InstructionCopyToR) },
-            {"noop", typeof(InstructionNoop) },                     {"-", typeof(InstructionNoop) },
-            {"prity", typeof(InstructionParity) },                  {"%", typeof(InstructionParity) },
-            {"randm", typeof(InstructionRandom) },                  {"?", typeof(InstructionRandom) },
-            {"read", typeof(InstructionRead) },                     {"i", typeof(InstructionRead) },
-            {"rstrt", typeof(InstructionRestart) },                 {"@", typeof(InstructionRestart) },
-            {"skip", typeof(InstructionSkip) },                     {".", typeof(InstructionSkip) },
-            {"halt", typeof(InstructionTerminate) },                {"!", typeof(InstructionTerminate) },
-            {"wrptr", typeof(InstructionWritePointer) },            {"v", typeof(InstructionWritePointer)}
+            {"andr", typeof(Instructions.BitWiseAndR) },              {"&", typeof(Instructions.BitWiseAndR) },
+            {"compl", typeof(Instructions.BitWiseComplement) },       {"~", typeof(Instructions.BitWiseComplement) },
+            {"orr", typeof(Instructions.BitWiseOrR) },                {"|", typeof(Instructions.BitWiseOrR) },
+            {"xorr", typeof(Instructions.BitWiseXorR) },              {"^", typeof(Instructions.BitWiseXorR) },
+            {"bumpd", typeof(Instructions.BumpDown) },                {"j", typeof(Instructions.BumpDown) },
+            {"bumpu", typeof(Instructions.BumpUp) },                  {"k", typeof(Instructions.BumpUp) },
+            {"cpytr", typeof(Instructions.CopyToR) },
+            {"noop", typeof(Instructions.Noop) },                     {"-", typeof(Instructions.Noop) },
+            {"prity", typeof(Instructions.Parity) },                  {"%", typeof(Instructions.Parity) },
+            {"randm", typeof(Instructions.WriteRandom) },                  {"?", typeof(Instructions.WriteRandom) },
+            {"read", typeof(Instructions.Read) },                     {"i", typeof(Instructions.Read) },
+            {"rstrt", typeof(Instructions.Restart) },                 {"@", typeof(Instructions.Restart) },
+            {"skip", typeof(Instructions.Skip) },                     {".", typeof(Instructions.Skip) },
+            {"halt", typeof(Instructions.Terminate) },                {"!", typeof(Instructions.Terminate) },
+            {"wrptr", typeof(Instructions.WritePointer) },            {"v", typeof(Instructions.WritePointer)}
         };
 
-        static readonly Dictionary<string, Type> str_nonbasic = new Dictionary<string, Type>()
+        static readonly Dictionary<string, Type> str_nonbasic = new()
         {
-            {"whenz", typeof(InstructionBasicOnZero) },             {"z", typeof(InstructionBasicOnZero) },
-            {"whnth", typeof(InstructionOnTopHalf) },
-            {"addi", typeof(InstructionAddi) },
-            {"group", typeof(InstructionGroup) },                   {"g", typeof(InstructionGroup) }
+            {"whenz", typeof(Instructions.OnZero) },             {"z", typeof(Instructions.OnZero) },
+            {"whnth", typeof(Instructions.InTopHalf) },
+            {"addi", typeof(Instructions.Addi) },
+            {"group", typeof(Instructions.Group) },                   {"g", typeof(Instructions.Group) }
         };
     }
 }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionBitWiseAndR : Interfaces.IBasicInstruction
+    class BitWiseOrR : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.SetMemory((byte)(Program.GetMemory() & Program.GetMemoryRightOf()));
+            Program.SetMemory((byte)(Program.GetMemory() | Program.GetMemoryRightOf()));
         }
     }
 }

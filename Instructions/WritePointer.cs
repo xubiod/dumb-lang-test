@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionNoop : Interfaces.IBasicInstruction
+    class WritePointer : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            return;
+            Program.SetMemory((byte)Program.MemoryPointer);
         }
     }
 }

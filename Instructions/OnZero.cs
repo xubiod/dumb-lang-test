@@ -5,25 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionOnTopHalf : Interfaces.IInstruction<Interfaces.IBasicInstruction>
+    class OnZero : Interfaces.IInstruction<Interfaces.IBasicInstruction>
     {
         public List<IBasicInstruction> ExecutedOnSuccess = new();
 
-        public InstructionOnTopHalf()
+        public OnZero()
         {
             return;
         }
 
-        public InstructionOnTopHalf(IBasicInstruction toRunOnZero)
+        public OnZero(IBasicInstruction toRunOnZero)
         {
             ExecutedOnSuccess.Add(toRunOnZero);
         }
 
         public void Execute()
         {
-            if (Program.MemoryPointer < 0x80)
+            if (Program.GetMemory() == 0)
             {
                 ExecutedOnSuccess[0].Execute();
             }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionTerminate : Interfaces.IBasicInstruction
+    class Skip : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.halt = true;
+            Program.skip = true;
         }
     }
 }

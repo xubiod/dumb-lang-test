@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test.Pointer
+namespace dumb_lang_test.Instructions.Pointer
 {
-    class PointerInstructionShiftL : Interfaces.IBasicInstruction
+    class ShiftRight : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.MemoryPointer += Program.MemoryPointer == 0 ? Program.MEMORY_SIZE - 1 : -1;
+            Program.MemoryPointer = (Program.MemoryPointer + 1) % Program.MEMORY_SIZE;
             return;
         }
     }
