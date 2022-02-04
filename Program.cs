@@ -87,8 +87,8 @@ namespace dumb_lang_test
                 System.Console.Write("  {0:X}x ", i);
                 for (int j = 0; j < 16; j++)
                 {
-                    Console.ForegroundColor = (i * 16) + j == special_index ? ConsoleColor.White : default_fcolor;
-                    Console.BackgroundColor = (i * 16) + j == special_index ? ConsoleColor.DarkMagenta : default_bcolor;
+                    Console.ForegroundColor = (i * 16) + j == special_index ? ConsoleColor.White : (i * 16) + j == MemoryPointer ? ConsoleColor.White : default_fcolor;
+                    Console.BackgroundColor = (i * 16) + j == special_index ? ConsoleColor.DarkMagenta : (i * 16) + j == MemoryPointer ? ConsoleColor.DarkGreen : default_bcolor;
                     System.Console.Write(" {0,2:X}", (int)memory[(i * 16) + j]);
 
                     Console.ForegroundColor = default_fcolor;
