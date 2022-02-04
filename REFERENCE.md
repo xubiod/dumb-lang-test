@@ -41,16 +41,6 @@ Checks parity of value at `mp`.
 If odd, value at `mp` is set to 0xFF.
 If even, value at `mp` is set to 0x00
 
-#### ReplaceToSpecial `rtspl`
-Copys value at `mp` to memory location 0xFF
-
-Mainly for pseudo instructions, but still accessible
-
-#### ReplaceFromSpecial `rfspl`
-Copys value at memory location 0xFF to `mp`
-
-Mainly for pseudo instructions, but still accessible
-
 ### Pointer Instructions
 Note these are considered basic instructions
 
@@ -63,7 +53,7 @@ Moves `mp` over to the element on the left. Will wrap around to 0xFF if `mp` was
 #### ShiftR `shftr`, `>`
 Moves `mp` over to the element on the right. Will wrap around to zero if `mp` was at 0xFF
 
-#### PeekJump `pkjmp`
+#### PeekJump `pkjmp`, `$`
 Reads value at `mp` and sets `mp` to read value
 
 ### Instruction Pointer Basic Instructions
@@ -76,6 +66,17 @@ Unconditionally moves instruction pointer to the first instruction
 
 #### Terminate `halt`, `!`
 Completely stops the program
+
+---
+
+## Special Instrucitions
+These are basic instructions that are mainly used for pseudo instructions, they aren't restricted though
+
+#### ReplaceToSpecial `rtspl`
+Copys value at `mp` to memory location 0xFF
+
+#### ReplaceFromSpecial `rfspl`
+Copys value at memory location 0xFF to `mp`
 
 ---
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dumb_lang_test.Instructions
 {
-    internal class ReplaceToSpecial : Interfaces.IBasicInstruction
+    internal class ReplaceToSpecial : Interfaces.ISpecialInstruction
     {
         public void Execute()
         {
