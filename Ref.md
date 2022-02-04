@@ -94,12 +94,12 @@ Skip will skip all instructions in the group
 
 Usage: `group <basic-instruction>,<basic-instruction>[,<basic-instruction>]`
 
-#### JumpOffset `jumpo`
+#### JumpOffsetFine `jmpof`
 Moves instruction pointer by a given offset. Interpreted as a **signed** byte
 
-Usage: `jumpo <byte>`
+Usage: `jmpof <byte>`
 
-#### JumpDirect `jumpd`
-Moves instruction pointer to gived **unsigned** integer
+#### JumpOffsetCoarse `jmpoc`
+Moves instruction pointer by a given offset multiplied by 128. Interpreted as a **signed** byte
 
-Usage: `jumpd <uint>`
+Usage: `jmpoc <byte>`

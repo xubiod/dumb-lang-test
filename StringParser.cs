@@ -61,18 +61,18 @@ namespace dumb_lang_test
                             ((Instructions.Group)new_instr).AddParameter((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[_]]));
                         }
                     }
-                    else if (new_instr.GetType() == typeof(Instructions.JumpOffset) && args.Length == 1)
+                    else if (new_instr.GetType() == typeof(Instructions.JumpOffsetFine) && args.Length == 1)
                     {
                         if (byte.TryParse(args[0], out byte o))
                         {
-                            ((Instructions.JumpOffset)new_instr).SetParameter(o);
+                            ((Instructions.JumpOffsetFine)new_instr).SetParameter(o);
                         }
                     }
-                    else if (new_instr.GetType() == typeof(Instructions.JumpDirect) && args.Length == 1)
+                    else if (new_instr.GetType() == typeof(Instructions.JumpOffsetCoarse) && args.Length == 1)
                     {
                         if (uint.TryParse(args[0], out uint o))
                         {
-                            ((Instructions.JumpDirect)new_instr).SetParameter(o);
+                            ((Instructions.JumpOffsetCoarse)new_instr).SetParameter(o);
                         }
                     }
 
@@ -113,8 +113,8 @@ namespace dumb_lang_test
             { "whnth", typeof(Instructions.InTopHalf) },             { "t", typeof(Instructions.InTopHalf)} ,
             { "addi", typeof(Instructions.Addi) },
             { "group", typeof(Instructions.Group) },                 { "g", typeof(Instructions.Group) },
-            { "jumpo", typeof(Instructions.JumpOffset) },
-            { "jumpd", typeof(Instructions.JumpDirect) }
+            { "jmpof", typeof(Instructions.JumpOffsetFine) },
+            { "jmpoc", typeof(Instructions.JumpOffsetCoarse) }
         };
     }
 }

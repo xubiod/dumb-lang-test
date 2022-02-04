@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dumb_lang_test.Instructions
 {
-    internal class JumpOffset : Interfaces.IInstruction<byte>
+    internal class JumpOffsetFine : Interfaces.IInstruction<byte>
     {
         byte line_offset;
 
