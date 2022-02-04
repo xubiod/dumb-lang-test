@@ -15,9 +15,9 @@ namespace dumb_lang_test
         {
             completed_instructions.Clear();
 
-            foreach (string key in psuedo_replacements.Keys)
+            foreach (string key in pseudo_replacements.Keys)
             {
-                program = program.Replace(key, psuedo_replacements[key]);
+                program = program.Replace(key, pseudo_replacements[key]);
             }
 
             string cleaned_line;
@@ -125,7 +125,7 @@ namespace dumb_lang_test
             { "jmpoc", typeof(Instructions.JumpOffsetCoarse) }
         };
 
-        static readonly Dictionary<string, string> psuedo_replacements = new()
+        static readonly Dictionary<string, string> pseudo_replacements = new()
         {
             { "andl", "shftl;rtspl;andr;shftr;cpyfl;shftl;rfspl;shftr" },
             { "orl", "shftl;rtspl;orr;shftr;cpyfl;shftl;rfspl;shftr" },
