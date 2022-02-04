@@ -44,10 +44,9 @@ namespace dumb_lang_test
                     {
                         List<byte> nums = new();
 
-                        byte o;
                         foreach (var arg in args)
                         {
-                            if (byte.TryParse(arg, out o))
+                            if (byte.TryParse(arg, out byte o))
                             {
                                 nums.Add(o);
                             }
