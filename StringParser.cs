@@ -15,11 +15,17 @@ namespace dumb_lang_test
         {
             completed_instructions.Clear();
 
+            foreach (string key in psuedo_replacements.Keys)
+            {
+                program = program.Replace(key, psuedo_replacements[key]);
+            }
+
             string cleaned_line;
             string opc;
             foreach (string line in program.Split('\n',';'))
             {
                 cleaned_line = Regex.Replace(line, @"[\s\r]+(\/\/.*)", "").Trim();
+                
                 opc = cleaned_line.Split(' ')[0];
 
                 if (str_basic.ContainsKey(cleaned_line))
@@ -104,17 +110,27 @@ namespace dumb_lang_test
             { "rstrt", typeof(Instructions.Restart) },               { "@", typeof(Instructions.Restart) },
             { "skip", typeof(Instructions.Skip) },                   { ".", typeof(Instructions.Skip) },
             { "halt", typeof(Instructions.Terminate) },              { "!", typeof(Instructions.Terminate) },
-            { "wrptr", typeof(Instructions.WritePointer) },          { "v", typeof(Instructions.WritePointer)}
+            { "wrptr", typeof(Instructions.WritePointer) },          { "v", typeof(Instructions.WritePointer) },
+            { "rtspl", typeof(Instructions.ReplaceToSpecial) },
+            { "rfspl", typeof(Instructions.ReplaceFromSpecial) }
         };
 
         static readonly Dictionary<string, Type> str_nonbasic = new()
         {
             { "whenz", typeof(Instructions.OnZero) },                { "z", typeof(Instructions.OnZero) },
-            { "whnth", typeof(Instructions.InTopHalf) },             { "t", typeof(Instructions.InTopHalf)} ,
+            { "whnth", typeof(Instructions.InTopHalf) },             { "t", typeof(Instructions.InTopHalf) },
             { "addi", typeof(Instructions.Addi) },
             { "group", typeof(Instructions.Group) },                 { "g", typeof(Instructions.Group) },
             { "jmpof", typeof(Instructions.JumpOffsetFine) },
             { "jmpoc", typeof(Instructions.JumpOffsetCoarse) }
+        };
+
+        static readonly Dictionary<string, string> psuedo_replacements = new()
+        {
+            { "andl", "shftl;rtspl;andr;shftr;cpyfl;shftl;rfspl;shftr" },
+            { "orl", "shftl;rtspl;orr;shftr;cpyfl;shftl;rfspl;shftr" },
+            { "xorl", "shftl;rtspl;xorr;shftr;cpyfl;shftl;rfspl;shftr" },
+            { "swapr", "shftr;rtspl;cpyfl;shftl;rfspl" }
         };
     }
 }

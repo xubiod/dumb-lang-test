@@ -14,6 +14,7 @@ namespace dumb_lang_test
         public static int instruction_pointer = 0;
         private static int cycles = 0;
         private static readonly int max_cycles = 500000;
+        private static readonly int special_index = 0xFF;
 
         static void Main(string[] args)
         {
@@ -23,7 +24,7 @@ namespace dumb_lang_test
                 memory[_] = 0x00;
             }
 
-            List<Interfaces.IBasicInstruction> instructions = StringParser.ParseString(@"k;>;whnth @");
+            List<Interfaces.IBasicInstruction> instructions = StringParser.ParseString(@"bumpd;swapr;bumpu;shftr;andl");
 
             DateTime _start = DateTime.Now;
 
@@ -44,6 +45,10 @@ namespace dumb_lang_test
         {
             Program.memory[MemoryPointer] = memory;
         }
+        public static void SetMemorySpecial(byte memory)
+        {
+            Program.memory[special_index] = memory;
+        }
 
         public static void SetMemoryRightOf(byte memory)
         {
@@ -61,9 +66,14 @@ namespace dumb_lang_test
 
         public static byte GetMemoryLeftOf() => memory[MemoryPointer - 1  == -1 ? 255 : MemoryPointer - 1];
 
+        public static byte GetMemorySpecial() => memory[special_index];
+
         public static void PrintFullMem()
         {
             System.Console.WriteLine("\nMemory readout ({0:D} bytes)", MEMORY_SIZE);
+
+            var default_fcolor = Console.ForegroundColor;
+            var default_bcolor = Console.BackgroundColor;
 
             System.Console.Write("     ");
             for (int k = 0; k < 16; k++)
@@ -77,7 +87,12 @@ namespace dumb_lang_test
                 System.Console.Write("  {0:X}x ", i);
                 for (int j = 0; j < 16; j++)
                 {
+                    Console.ForegroundColor = (i * 16) + j == special_index ? ConsoleColor.White : default_fcolor;
+                    Console.BackgroundColor = (i * 16) + j == special_index ? ConsoleColor.DarkMagenta : default_bcolor;
                     System.Console.Write(" {0,2:X}", (int)memory[(i * 16) + j]);
+
+                    Console.ForegroundColor = default_fcolor;
+                    Console.BackgroundColor = default_bcolor;
                 }
 
                 System.Console.WriteLine("  {0:X}x", i);
