@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionBumpDown : Interfaces.IBasicInstruction
+    class CopyToR : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.ShiftMemory(0xFF);
+            Program.SetMemoryRightOf(Program.GetMemory());
         }
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionGroup : Interfaces.IInstruction<Interfaces.IBasicInstruction>
+    class Group : Interfaces.IInstruction<Interfaces.IBasicInstruction>
     {
         readonly List<Interfaces.IBasicInstruction> grouped = new();
 

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionBumpUp : Interfaces.IBasicInstruction
+    class BumpDown : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.ShiftMemory(1);
+            Program.ShiftMemory(0xFF);
         }
     }
 }

@@ -15,7 +15,7 @@ Does nothing, spends a cycle
 #### Read `read`, `i`
 Reads a key from standard input. Sets value at `mp` to key
 
-#### Random `randm`, `?`
+#### WriteRandom `randm`, `?`
 Sets value at `mp` to a random number from 0x00 to 0xFF
 
 #### WritePointer `wrptr`, `v`
@@ -70,12 +70,12 @@ Completely stops the program
 ## Non-basic Instructions
 These instructions use arguments and **cannot** be used in another instruction for conditionals or grouped
 
-#### BasicOnZero `whenz`, `z`
+#### OnZero `whenz`, `z`
 Checks value at `mp` if it's zero. Runs the basic instruction given if check completes
 
 Usage: `whenz <basic-instruction>`
 
-#### OnTopHalf `whnth`
+#### InTopHalf `whnth`
 Checks if `mp` is in the top half of memory (`mp` > 0x80). Runs the basic instruction given if check completes
 
 Usage: `whnth <basic-instruction>`

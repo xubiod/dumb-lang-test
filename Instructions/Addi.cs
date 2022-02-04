@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionAddi : Interfaces.IInstruction<byte>
+    class Addi : Interfaces.IInstruction<byte>
     {
-        List<byte> immediates = new();
+        readonly List<byte> immediates = new();
 
-        public InstructionAddi()
+        public Addi()
         {
             return;
         }
 
-        public InstructionAddi(List<byte> immediates)
+        public Addi(List<byte> immediates)
         {
             this.immediates = immediates;
         }

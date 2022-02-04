@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions.Pointer
 {
-    class InstructionBitWiseComplement : Interfaces.IBasicInstruction
+    class PeekJump : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.SetMemory((byte)(~Program.GetMemory()));
+            Program.MemoryPointer = Program.GetMemory();
         }
     }
 }

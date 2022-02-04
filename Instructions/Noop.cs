@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test.Pointer
+namespace dumb_lang_test.Instructions
 {
-    class PointerInstructionReset : Interfaces.IBasicInstruction
+    class Noop : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.MemoryPointer = 0;
             return;
         }
     }

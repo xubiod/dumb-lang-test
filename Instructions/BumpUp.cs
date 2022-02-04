@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionRead : Interfaces.IBasicInstruction
+    class BumpUp : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
-            Program.SetMemory((byte)Console.ReadKey().KeyChar);
+            Program.ShiftMemory(1);
         }
     }
 }

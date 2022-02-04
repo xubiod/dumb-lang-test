@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test
+namespace dumb_lang_test.Instructions
 {
-    class InstructionParity : Interfaces.IBasicInstruction
+    class Parity : Interfaces.IBasicInstruction
     {
         public void Execute()
         {
