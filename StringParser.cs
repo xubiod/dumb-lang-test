@@ -96,7 +96,7 @@ namespace dumb_lang_test
         static readonly Dictionary<string, Type> str_nonbasic = new()
         {
             {"whenz", typeof(Instructions.OnZero) },                {"z", typeof(Instructions.OnZero) },
-            {"whnth", typeof(Instructions.InTopHalf) },
+            {"whnth", typeof(Instructions.InTopHalf) },             {"t", typeof(Instructions.InTopHalf)} ,
             {"addi", typeof(Instructions.Addi) },
             {"group", typeof(Instructions.Group) },                 {"g", typeof(Instructions.Group) }
         };
