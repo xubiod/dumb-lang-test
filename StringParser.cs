@@ -63,14 +63,14 @@ namespace dumb_lang_test
                     }
                     else if (new_instr.GetType() == typeof(Instructions.JumpOffsetFine) && args.Length == 1)
                     {
-                        if (byte.TryParse(args[0], out byte o))
+                        if (sbyte.TryParse(args[0], out sbyte o))
                         {
                             ((Instructions.JumpOffsetFine)new_instr).SetParameter(o);
                         }
                     }
                     else if (new_instr.GetType() == typeof(Instructions.JumpOffsetCoarse) && args.Length == 1)
                     {
-                        if (uint.TryParse(args[0], out uint o))
+                        if (sbyte.TryParse(args[0], out sbyte o))
                         {
                             ((Instructions.JumpOffsetCoarse)new_instr).SetParameter(o);
                         }

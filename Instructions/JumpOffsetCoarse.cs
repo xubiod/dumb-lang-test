@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace dumb_lang_test.Instructions
 {
-    internal class JumpOffsetCoarse : Interfaces.IInstruction<byte>
+    internal class JumpOffsetCoarse : Interfaces.IInstruction<sbyte>
     {
-        byte line_offset;
+        sbyte line_offset;
 
         public void Execute()
         {
-            bool signed = (line_offset & 0x80) == 0x80;
-
-            if (signed) Program.instruction_pointer -= line_offset * 128;
-            else Program.instruction_pointer += line_offset * 128;
+            Program.instruction_pointer += line_offset * 128;
         }
 
-        public void FillParameters(List<byte> parameters = null)
+        public void FillParameters(List<sbyte> parameters = null)
         {
             line_offset = parameters[0];
         }
 
-        public void SetParameter(byte parameter)
+        public void SetParameter(sbyte parameter)
         {
             line_offset = parameter;
         }
