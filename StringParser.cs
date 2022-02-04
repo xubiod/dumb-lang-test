@@ -91,7 +91,7 @@ namespace dumb_lang_test
 
         static readonly Dictionary<string, Type> str_basic = new()
         {
-            { "pkjmp", typeof(Instructions.Pointer.PeekJump) }, // {"", typeof(Pointer.PointerInstructionPeekJump) },
+            { "pkjmp", typeof(Instructions.Pointer.PeekJump) },      { "$", typeof(Instructions.Pointer.PeekJump) },
             { "reset", typeof(Instructions.Pointer.Reset) },         { "0", typeof(Instructions.Pointer.Reset) },
             { "shftl", typeof(Instructions.Pointer.ShiftLeft) },     { "<", typeof(Instructions.Pointer.ShiftLeft) },
             { "shftr", typeof(Instructions.Pointer.ShiftRight) },    { ">", typeof(Instructions.Pointer.ShiftRight) },
