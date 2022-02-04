@@ -69,9 +69,9 @@ namespace dumb_lang_test
             return completed_instructions;
         }
 
-        static readonly Dictionary<string, Type> str_basic = new Dictionary<string, Type>()
+        static readonly Dictionary<string, Type> str_basic = new()
         {
-            {"pkjmp", typeof(Pointer.PointerInstructionPeekJump) },
+            {"pkjmp", typeof(Pointer.PointerInstructionPeekJump) }, // {"", typeof(Pointer.PointerInstructionPeekJump) },
             {"reset", typeof(Pointer.PointerInstructionReset) },    {"0", typeof(Pointer.PointerInstructionReset) },
             {"shftl", typeof(Pointer.PointerInstructionShiftL) },   {"<", typeof(Pointer.PointerInstructionShiftL) },
             {"shftr", typeof(Pointer.PointerInstructionShiftR) },   {">", typeof(Pointer.PointerInstructionShiftR) },
@@ -90,7 +90,7 @@ namespace dumb_lang_test
             {"rstrt", typeof(InstructionRestart) },                 {"@", typeof(InstructionRestart) },
             {"skip", typeof(InstructionSkip) },                     {".", typeof(InstructionSkip) },
             {"halt", typeof(InstructionTerminate) },                {"!", typeof(InstructionTerminate) },
-            {"wrptr", typeof(InstructionWritePointer) }
+            {"wrptr", typeof(InstructionWritePointer) },            {"v", typeof(InstructionWritePointer)}
         };
 
         static readonly Dictionary<string, Type> str_nonbasic = new Dictionary<string, Type>()

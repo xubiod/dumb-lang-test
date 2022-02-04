@@ -18,7 +18,7 @@ Reads a key from standard input. Sets value at `mp` to key
 #### Random `randm`, `?`
 Sets value at `mp` to a random number from 0x00 to 0xFF
 
-#### WritePointer `wrptr`
+#### WritePointer `wrptr`, `v`
 Sets value at `mp` to `mp`
 
 #### CopyToR `cpytr`
