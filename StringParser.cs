@@ -72,33 +72,33 @@ namespace dumb_lang_test
         static readonly Dictionary<string, Type> str_basic = new()
         {
             {"pkjmp", typeof(Instructions.Pointer.PeekJump) }, // {"", typeof(Pointer.PointerInstructionPeekJump) },
-            {"reset", typeof(Instructions.Pointer.Reset) },    {"0", typeof(Instructions.Pointer.Reset) },
-            {"shftl", typeof(Instructions.Pointer.ShiftLeft) },   {"<", typeof(Instructions.Pointer.ShiftLeft) },
-            {"shftr", typeof(Instructions.Pointer.ShiftRight) },   {">", typeof(Instructions.Pointer.ShiftRight) },
+            {"reset", typeof(Instructions.Pointer.Reset) },         {"0", typeof(Instructions.Pointer.Reset) },
+            {"shftl", typeof(Instructions.Pointer.ShiftLeft) },     {"<", typeof(Instructions.Pointer.ShiftLeft) },
+            {"shftr", typeof(Instructions.Pointer.ShiftRight) },    {">", typeof(Instructions.Pointer.ShiftRight) },
 
-            {"andr", typeof(Instructions.BitWiseAndR) },              {"&", typeof(Instructions.BitWiseAndR) },
-            {"compl", typeof(Instructions.BitWiseComplement) },       {"~", typeof(Instructions.BitWiseComplement) },
-            {"orr", typeof(Instructions.BitWiseOrR) },                {"|", typeof(Instructions.BitWiseOrR) },
-            {"xorr", typeof(Instructions.BitWiseXorR) },              {"^", typeof(Instructions.BitWiseXorR) },
-            {"bumpd", typeof(Instructions.BumpDown) },                {"j", typeof(Instructions.BumpDown) },
-            {"bumpu", typeof(Instructions.BumpUp) },                  {"k", typeof(Instructions.BumpUp) },
+            {"andr", typeof(Instructions.BitWiseAndR) },            {"&", typeof(Instructions.BitWiseAndR) },
+            {"compl", typeof(Instructions.BitWiseComplement) },     {"~", typeof(Instructions.BitWiseComplement) },
+            {"orr", typeof(Instructions.BitWiseOrR) },              {"|", typeof(Instructions.BitWiseOrR) },
+            {"xorr", typeof(Instructions.BitWiseXorR) },            {"^", typeof(Instructions.BitWiseXorR) },
+            {"bumpd", typeof(Instructions.BumpDown) },              {"j", typeof(Instructions.BumpDown) },
+            {"bumpu", typeof(Instructions.BumpUp) },                {"k", typeof(Instructions.BumpUp) },
             {"cpyfl", typeof(Instructions.CopyFromL) },
-            {"noop", typeof(Instructions.Noop) },                     {"-", typeof(Instructions.Noop) },
-            {"prity", typeof(Instructions.Parity) },                  {"%", typeof(Instructions.Parity) },
-            {"randm", typeof(Instructions.WriteRandom) },                  {"?", typeof(Instructions.WriteRandom) },
-            {"read", typeof(Instructions.Read) },                     {"i", typeof(Instructions.Read) },
-            {"rstrt", typeof(Instructions.Restart) },                 {"@", typeof(Instructions.Restart) },
-            {"skip", typeof(Instructions.Skip) },                     {".", typeof(Instructions.Skip) },
-            {"halt", typeof(Instructions.Terminate) },                {"!", typeof(Instructions.Terminate) },
-            {"wrptr", typeof(Instructions.WritePointer) },            {"v", typeof(Instructions.WritePointer)}
+            {"noop", typeof(Instructions.Noop) },                   {"-", typeof(Instructions.Noop) },
+            {"prity", typeof(Instructions.Parity) },                {"%", typeof(Instructions.Parity) },
+            {"randm", typeof(Instructions.WriteRandom) },           {"?", typeof(Instructions.WriteRandom) },
+            {"read", typeof(Instructions.Read) },                   {"i", typeof(Instructions.Read) },
+            {"rstrt", typeof(Instructions.Restart) },               {"@", typeof(Instructions.Restart) },
+            {"skip", typeof(Instructions.Skip) },                   {".", typeof(Instructions.Skip) },
+            {"halt", typeof(Instructions.Terminate) },              {"!", typeof(Instructions.Terminate) },
+            {"wrptr", typeof(Instructions.WritePointer) },          {"v", typeof(Instructions.WritePointer)}
         };
 
         static readonly Dictionary<string, Type> str_nonbasic = new()
         {
-            {"whenz", typeof(Instructions.OnZero) },             {"z", typeof(Instructions.OnZero) },
+            {"whenz", typeof(Instructions.OnZero) },                {"z", typeof(Instructions.OnZero) },
             {"whnth", typeof(Instructions.InTopHalf) },
             {"addi", typeof(Instructions.Addi) },
-            {"group", typeof(Instructions.Group) },                   {"g", typeof(Instructions.Group) }
+            {"group", typeof(Instructions.Group) },                 {"g", typeof(Instructions.Group) }
         };
     }
 }
