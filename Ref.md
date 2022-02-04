@@ -98,3 +98,8 @@ Usage: `group <basic-instruction>,<basic-instruction>[,<basic-instruction>]`
 Moves instruction pointer by a given offset. Interpreted as a **signed** byte
 
 Usage: `jumpo <byte>`
+
+#### JumpDirect `jumpd`
+Moves instruction pointer to gived **unsigned** integer
+
+Usage: `jumpd <uint>`

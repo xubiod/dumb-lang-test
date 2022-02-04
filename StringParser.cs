@@ -68,6 +68,13 @@ namespace dumb_lang_test
                             ((Instructions.JumpOffset)new_instr).SetParameter(o);
                         }
                     }
+                    else if (new_instr.GetType() == typeof(Instructions.JumpDirect) && args.Length == 1)
+                    {
+                        if (uint.TryParse(args[0], out uint o))
+                        {
+                            ((Instructions.JumpDirect)new_instr).SetParameter(o);
+                        }
+                    }
 
                     completed_instructions.Add(new_instr);
                 }
@@ -106,7 +113,8 @@ namespace dumb_lang_test
             { "whnth", typeof(Instructions.InTopHalf) },             { "t", typeof(Instructions.InTopHalf)} ,
             { "addi", typeof(Instructions.Addi) },
             { "group", typeof(Instructions.Group) },                 { "g", typeof(Instructions.Group) },
-            { "jumpo", typeof(Instructions.JumpOffset) }
+            { "jumpo", typeof(Instructions.JumpOffset) },
+            { "jumpd", typeof(Instructions.JumpDirect) }
         };
     }
 }
