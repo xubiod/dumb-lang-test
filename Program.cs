@@ -7,14 +7,15 @@ namespace dumb_lang_test
     {
         public const int MEMORY_SIZE = 256;
 
-        private static byte[] memory = new byte[MEMORY_SIZE];
         public static int MemoryPointer = 0;
         public static bool skip = false;
         public static bool halt = false;
         public static int instruction_pointer = 0;
+        public static readonly int special_index = 0xFF;
+
+        private static byte[] memory = new byte[MEMORY_SIZE];
         private static int cycles = 0;
         private static readonly int max_cycles = 500000;
-        private static readonly int special_index = 0xFF;
 
         static void Main(string[] args)
         {

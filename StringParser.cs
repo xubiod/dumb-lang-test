@@ -112,7 +112,9 @@ namespace dumb_lang_test
             { "halt", typeof(Instructions.Terminate) },              { "!", typeof(Instructions.Terminate) },
             { "wrptr", typeof(Instructions.WritePointer) },          { "v", typeof(Instructions.WritePointer) },
             { "rtspl", typeof(Instructions.ReplaceToSpecial) },
-            { "rfspl", typeof(Instructions.ReplaceFromSpecial) }
+            { "rfspl", typeof(Instructions.ReplaceFromSpecial) },
+            { "mpspl", typeof(Instructions.MemPointerToSpecial) },
+            { "jpspl", typeof(Instructions.SpecialJump) }
         };
 
         static readonly Dictionary<string, Type> str_nonbasic = new()

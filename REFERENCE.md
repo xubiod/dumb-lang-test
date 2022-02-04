@@ -69,7 +69,7 @@ Completely stops the program
 
 ---
 
-## Special Instrucitions
+## Special Instructions
 These are basic instructions that are mainly used for pseudo instructions, they aren't restricted though
 
 #### ReplaceToSpecial `rtspl`
@@ -77,6 +77,12 @@ Copys value at `mp` to memory location 0xFF
 
 #### ReplaceFromSpecial `rfspl`
 Copys value at memory location 0xFF to `mp`
+
+#### MemPointerToSpecial `mpspl`
+Copys `mp` to memory location 0xFF
+
+#### JumpSpecial `jpspl`
+Moves `mp` to memory location 0xFF
 
 ---
 
