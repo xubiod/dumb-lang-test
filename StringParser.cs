@@ -10,14 +10,39 @@ namespace dumb_lang_test
     class StringParser
     {
         static List<Interfaces.IBasicInstruction> completed_instructions = new();
+        public static ParserOptions options;
 
         public static List<Interfaces.IBasicInstruction> ParseString(string program)
         {
+            options = new ParserOptions();
             completed_instructions.Clear();
 
-            foreach (string key in pseudo_replacements.Keys)
+            if (program.StartsWith("#env"))
             {
-                program = program.Replace(key, pseudo_replacements[key]);
+                string envOptions = program.Substring(0, program.IndexOf("#envstop") + "#envstop".Length);
+
+                options.AllowPseudoInstructions = !program.Contains("disallow-pseudo-instructions");
+                options.AllowUserSpecials = !program.Contains("disallow-user-specials");
+                options.StrictParsing = program.Contains("strict-parse");
+                options.DebugState = program.Contains("enable-debug");
+
+                program = program.Replace(envOptions, "");
+            }
+
+            if (!options.AllowUserSpecials)
+            {
+                foreach (string key in str_special.Keys)
+                {
+                    program = program.Replace(key, "noop");
+                }
+            }
+
+            if (options.AllowPseudoInstructions)
+            {
+                foreach (string key in pseudo_replacements.Keys)
+                {
+                    program = program.Replace(key, pseudo_replacements[key]);
+                }
             }
 
             string cleaned_line;
@@ -29,12 +54,16 @@ namespace dumb_lang_test
             foreach (string line in program.Split('\n',';'))
             {
                 cleaned_line = Regex.Replace(line, @"[\s\r]+(\/\/.*)", "").Trim();
-                
+
                 opc = cleaned_line.Split(' ')[0];
 
                 if (str_basic.ContainsKey(cleaned_line))
                 {
                     completed_instructions.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[cleaned_line]));
+                }
+                else if (str_special.ContainsKey(cleaned_line))
+                {
+                    completed_instructions.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_special[cleaned_line]));
                 }
                 else if (str_nonbasic.ContainsKey(opc))
                 {
@@ -90,8 +119,16 @@ namespace dumb_lang_test
                 }
                 else
                 {
-                    System.Console.WriteLine("Parse: {0} unrecognized, ignoring", opc);
-                    unrecognized++;
+                    if (options.StrictParsing)
+                    {
+                        System.Console.WriteLine("Parse: {0} unrecognized, halting", opc);
+                        return new List<Interfaces.IBasicInstruction>();
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Parse: {0} unrecognized, ignoring", opc);
+                        unrecognized++;
+                    }
                 }
             }
 
@@ -123,7 +160,11 @@ namespace dumb_lang_test
             { "rstrt", typeof(Instructions.Restart) },               { "@", typeof(Instructions.Restart) },
             { "skip", typeof(Instructions.Skip) },                   { ".", typeof(Instructions.Skip) },
             { "halt", typeof(Instructions.Terminate) },              { "!", typeof(Instructions.Terminate) },
-            { "wrptr", typeof(Instructions.WritePointer) },          { "v", typeof(Instructions.WritePointer) },
+            { "wrptr", typeof(Instructions.WritePointer) },          { "v", typeof(Instructions.WritePointer) }
+        };
+
+        static readonly Dictionary<string, Type> str_special = new()
+        {
             { "rtspl", typeof(Instructions.ReplaceToSpecial) },
             { "rfspl", typeof(Instructions.ReplaceFromSpecial) },
             { "mpspl", typeof(Instructions.MemPointerToSpecial) },
@@ -145,7 +186,8 @@ namespace dumb_lang_test
             { "andl", "shftl;rtspl;andr;shftr;cpyfl;shftl;rfspl;shftr" },
             { "orl", "shftl;rtspl;orr;shftr;cpyfl;shftl;rfspl;shftr" },
             { "xorl", "shftl;rtspl;xorr;shftr;cpyfl;shftl;rfspl;shftr" },
-            { "swapr", "shftr;rtspl;cpyfl;shftl;rfspl" }
+            { "swapr", "shftr;rtspl;cpyfl;shftl;rfspl" },
+            { "jpspl", "reset;shftl" }
         };
     }
 }

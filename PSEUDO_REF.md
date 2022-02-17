@@ -17,3 +17,8 @@ Decomposes into `shftl; rtspl; xorr; shftr; cpyfl; shftl; rfspl; shftr`, overwri
 Swaps value at `mp` and value at `mp + 1` with each other
 
 Decomposes into `shftr; rtspl; cpyfl; shftl; rfspl`, overwrites location 0xFF
+
+#### `jpspl`
+Moves `mp` to memory location 0xFF
+
+Decomposes into `reset; shftl`, does not overwrite location 0xFF

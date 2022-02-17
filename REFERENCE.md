@@ -1,4 +1,33 @@
-﻿## Basic Instructions
+﻿## Environment
+Optional block that must be first in a program
+
+Environment details are encased in a special block, starting with `#env` and terminating with `#envstop`. Can be on a single line and
+flags don't need to be separated by anything
+
+```
+#env
+ ... any environment string flags to be written here ...
+ ... all other content is ignored ...
+#envstop
+```
+
+
+#### `disallow-pseudo-instructions`
+Will not decompose pseudo instructions, causing the parser to not recognize them.
+Can cause a side effect of parsing not ignoring unrecognized instructions
+
+#### `disallow-user-specials`
+Will change all special instructions from the user (not from a decomposed pseudo instruction) to turn into
+a `noop`
+
+#### `strict-parse`
+Will force parsing to stop and execute *nothing* if a unrecognized instruction is read.
+Overwrites default behaviour of ignoring unrecognized instructions
+
+#### `enable-debug`
+Unimplemented as of writing
+
+## Basic Instructions
 Basic instructions contain no arguments
 
 #### BumpUp `bumpu`, `k`
@@ -70,7 +99,7 @@ Completely stops the program
 ---
 
 ## Special Instructions
-These are basic instructions that are mainly used for pseudo instructions, they aren't restricted though
+These are basic instructions that are mainly used for pseudo instructions, they aren't restricted by default though (with some caveats in some instances)
 
 #### ReplaceToSpecial `rtspl`
 Copys value at `mp` to memory location 0xFF
@@ -81,7 +110,7 @@ Copys value at memory location 0xFF to `mp`
 #### MemPointerToSpecial `mpspl`
 Copys `mp` to memory location 0xFF
 
-#### JumpSpecial `jpspl`
+#### JumpSpecial\* `jpspl`
 Moves `mp` to memory location 0xFF
 
 ---
@@ -120,6 +149,10 @@ Usage: `jmpof <sbyte>`
 Moves instruction pointer by a given offset multiplied by 128. Uses a **signed** byte
 
 Usage: `jmpoc <sbyte>`
+
+## Footnotes
+
+\* Note when not replaced within a pseudo instruction these are by themselves a pseudo instruction, so when you use them they decompose into multiple but when a pseudo instruction does they do *not* decompose
 
 ## Other
 Pseudo instruction reference [here](PSEUDO_REF.md).
