@@ -50,7 +50,7 @@ Sets value at `mp` to a random number from 0x00 to 0xFF
 #### WritePointer `wrptr`, `v`
 Sets value at `mp` to `mp`
 
-#### CopyFromL `cpyfl`
+#### CopyFromL `cpyfl`, `c`
 Sets value of `mp` to value 1 left of `mp`
 
 #### BitWiseXorR `xorr`, `^`
