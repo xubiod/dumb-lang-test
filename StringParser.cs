@@ -153,7 +153,7 @@ namespace dumb_lang_test
 			{ "bumpd", typeof(Instructions.BumpDown) },             { "j", typeof(Instructions.BumpDown) },
 			{ "bumpu", typeof(Instructions.BumpUp) },               { "k", typeof(Instructions.BumpUp) },
 			{ "cpyfl", typeof(Instructions.CopyFromL) },			{ "c", typeof(Instructions.CopyFromL) },
-			{ "noop",  typeof(Instructions.Noop) },                 { "-", typeof(Instructions.Noop) },
+			{ "noop",  typeof(Instructions.Noop) },                 { "_", typeof(Instructions.Noop) },
 			{ "prity", typeof(Instructions.Parity) },               { "%", typeof(Instructions.Parity) },
 			{ "randm", typeof(Instructions.WriteRandom) },          { "?", typeof(Instructions.WriteRandom) },
 			{ "read",  typeof(Instructions.Read) },                 { "i", typeof(Instructions.Read) },
@@ -175,7 +175,7 @@ namespace dumb_lang_test
 		{
 			{ "whenz", typeof(Instructions.OnZero) },               { "z", typeof(Instructions.OnZero) },
 			{ "whnth", typeof(Instructions.InTopHalf) },            { "t", typeof(Instructions.InTopHalf) },
-			{ "addi",  typeof(Instructions.Addi) },
+			{ "addi",  typeof(Instructions.Addi) },                 { "+", typeof(Instructions.Addi) },
 			{ "group", typeof(Instructions.Group) },                { "g", typeof(Instructions.Group) },
 			{ "jmpof", typeof(Instructions.JumpOffsetFine) },
 			{ "jmpoc", typeof(Instructions.JumpOffsetCoarse) }

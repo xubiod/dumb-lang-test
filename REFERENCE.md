@@ -38,7 +38,7 @@ Appears to perform `[value @ mp] = [value @ mp] - 1`
 
 As it works with bytes, it actually performs `[value @ mp] = [value @ mp] + 0xFF` in C# code
 
-#### Noop `noop`, `-`
+#### Noop `noop`, `_`
 Does nothing, spends a cycle
 
 #### Read `read`, `i`
@@ -128,7 +128,7 @@ Checks if `mp` is in the top half of memory (`mp` < 0x80). Runs the basic instru
 
 Usage: `whnth <basic-instruction>`
 
-#### Addi `addi`
+#### Addi `addi`, `+`
 Adds all given immediate bytes together with `mp` and sets value at `mp` to result.
 
 Usage: `addi <byte>,<byte>,...`
