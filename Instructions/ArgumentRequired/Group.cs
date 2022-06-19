@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test.Instructions
+namespace dumb_lang_test.Instructions.ArgumentRequired
 {
-    class Group : Interfaces.IInstruction<Interfaces.IBasicInstruction>
+    class Group : IInstruction<IBasicInstruction>
     {
-        readonly List<Interfaces.IBasicInstruction> grouped = new();
+        readonly List<IBasicInstruction> grouped = new();
 
         public void Execute()
         {
-            foreach (Interfaces.IBasicInstruction instruction in grouped)
+            foreach (IBasicInstruction instruction in grouped)
             {
                 instruction.Execute();
                 Program.AddCycles(3);

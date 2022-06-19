@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test.Instructions
+namespace dumb_lang_test.Instructions.ArgumentRequired
 {
-    class OnZero : Interfaces.IInstruction<Interfaces.IBasicInstruction>
+    class OnZero : IInstruction<IBasicInstruction>
     {
         public List<IBasicInstruction> ExecutedOnSuccess = new();
 

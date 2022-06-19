@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dumb_lang_test.Instructions
+namespace dumb_lang_test.Instructions.ArgumentRequired
 {
     class Addi : Interfaces.IInstruction<byte>
     {

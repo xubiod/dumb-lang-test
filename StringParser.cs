@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dumb_lang_test
 {
-	class StringParser
+    class StringParser
 	{
 		static readonly List<Interfaces.IBasicInstruction> completed_instructions = new();
 		public static ParserOptions options;
@@ -71,15 +71,15 @@ namespace dumb_lang_test
 
 					string[] args = cleaned_line.Split(' ')[1].Split(',');
 
-					if (new_instr.GetType() == typeof(Instructions.OnZero) && args.Length == 1)
+					if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.OnZero) && args.Length == 1)
 					{
-						((Instructions.OnZero)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
+						((Instructions.ArgumentRequired.OnZero)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
 					}
-					else if (new_instr.GetType() == typeof(Instructions.InTopHalf) && args.Length == 1)
+					else if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.InTopHalf) && args.Length == 1)
 					{
-						((Instructions.InTopHalf)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
+						((Instructions.ArgumentRequired.InTopHalf)new_instr).ExecutedOnSuccess.Add((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[0]]));
 					}
-					else if (new_instr.GetType() == typeof(Instructions.Addi))
+					else if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.Addi))
 					{
 						List<byte> nums = new();
 
@@ -91,27 +91,27 @@ namespace dumb_lang_test
 							}
 						}
 
-						((Instructions.Addi)new_instr).FillParameters(nums);
+						((Instructions.ArgumentRequired.Addi)new_instr).FillParameters(nums);
 					}
-					else if (new_instr.GetType() == typeof(Instructions.Group) && args.Length > 1 && args.Length < 4)
+					else if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.Group) && args.Length > 1 && args.Length < 4)
 					{
 						for (int _ = 0; _ < args.Length; _++)
 						{
-							((Instructions.Group)new_instr).AddParameter((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[_]]));
+							((Instructions.ArgumentRequired.Group)new_instr).AddParameter((Interfaces.IBasicInstruction)Activator.CreateInstance(str_basic[args[_]]));
 						}
 					}
-					else if (new_instr.GetType() == typeof(Instructions.JumpOffsetFine) && args.Length == 1)
+					else if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.JumpOffsetFine) && args.Length == 1)
 					{
 						if (sbyte.TryParse(args[0], out sbyte o))
 						{
-							((Instructions.JumpOffsetFine)new_instr).SetParameter(o);
+							((Instructions.ArgumentRequired.JumpOffsetFine)new_instr).SetParameter(o);
 						}
 					}
-					else if (new_instr.GetType() == typeof(Instructions.JumpOffsetCoarse) && args.Length == 1)
+					else if (new_instr.GetType() == typeof(Instructions.ArgumentRequired.JumpOffsetCoarse) && args.Length == 1)
 					{
 						if (sbyte.TryParse(args[0], out sbyte o))
 						{
-							((Instructions.JumpOffsetCoarse)new_instr).SetParameter(o);
+							((Instructions.ArgumentRequired.JumpOffsetCoarse)new_instr).SetParameter(o);
 						}
 					}
 
@@ -173,12 +173,12 @@ namespace dumb_lang_test
 
 		static readonly Dictionary<string, Type> str_nonbasic = new()
 		{
-			{ "whenz", typeof(Instructions.OnZero) },               { "z", typeof(Instructions.OnZero) },
-			{ "whnth", typeof(Instructions.InTopHalf) },            { "t", typeof(Instructions.InTopHalf) },
-			{ "addi",  typeof(Instructions.Addi) },                 { "+", typeof(Instructions.Addi) },
-			{ "group", typeof(Instructions.Group) },                { "g", typeof(Instructions.Group) },
-			{ "jmpof", typeof(Instructions.JumpOffsetFine) },
-			{ "jmpoc", typeof(Instructions.JumpOffsetCoarse) }
+			{ "whenz", typeof(Instructions.ArgumentRequired.OnZero) },               { "z", typeof(Instructions.ArgumentRequired.OnZero) },
+			{ "whnth", typeof(Instructions.ArgumentRequired.InTopHalf) },            { "t", typeof(Instructions.ArgumentRequired.InTopHalf) },
+			{ "addi",  typeof(Instructions.ArgumentRequired.Addi) },                 { "+", typeof(Instructions.ArgumentRequired.Addi) },
+			{ "group", typeof(Instructions.ArgumentRequired.Group) },                { "g", typeof(Instructions.ArgumentRequired.Group) },
+			{ "jmpof", typeof(Instructions.ArgumentRequired.JumpOffsetFine) },
+			{ "jmpoc", typeof(Instructions.ArgumentRequired.JumpOffsetCoarse) }
 		};
 
 		static readonly Dictionary<string, string> pseudo_replacements = new()
