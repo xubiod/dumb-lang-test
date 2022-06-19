@@ -15,7 +15,7 @@ namespace dumb_lang_test
         public static int instruction_pointer = 0;
         public static readonly int special_index = 0xFF;
 
-        private static byte[] memory = new byte[MEMORY_SIZE];
+        private static readonly byte[] memory = new byte[MEMORY_SIZE];
         private static int cycles = 0;
         private static readonly int max_cycles = 500000;
         private static string program = "";
