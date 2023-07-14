@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions.Pointer
+namespace dumb_lang_test.Instructions.Pointer;
+
+internal class Reset : IBasicInstruction
 {
-    class Reset : Interfaces.IBasicInstruction
+    public void Execute()
     {
-        public void Execute()
-        {
-            Program.MemoryPointer = 0;
-            return;
-        }
+        Program.MemoryPointer = 0;
     }
 }

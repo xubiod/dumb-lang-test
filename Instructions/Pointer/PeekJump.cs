@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions.Pointer
+namespace dumb_lang_test.Instructions.Pointer;
+
+internal class PeekJump : IBasicInstruction
 {
-    class PeekJump : Interfaces.IBasicInstruction
+    public void Execute()
     {
-        public void Execute()
-        {
-            Program.MemoryPointer = Program.GetMemory();
-        }
+        Program.MemoryPointer = Program.GetMemory();
     }
 }

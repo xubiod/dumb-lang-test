@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace dumb_lang_test;
 
-namespace dumb_lang_test
+internal class ParserOptions
 {
-    class ParserOptions
-    {
-        public bool AllowUserSpecials = true;
-        public bool AllowPseudoInstructions = true;
-        public bool DebugState = false;
-        public bool StrictParsing = false;
-    }
+    public bool AllowUserSpecials = true;
+    public bool AllowPseudoInstructions = true;
+    public bool DebugState = false;
+    public bool StrictParsing = false;
 }

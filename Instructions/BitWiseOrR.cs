@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions
+namespace dumb_lang_test.Instructions;
+
+internal class BitWiseOrR : IBasicInstruction
 {
-    class BitWiseOrR : Interfaces.IBasicInstruction
+    public void Execute()
     {
-        public void Execute()
-        {
-            Program.SetMemory((byte)(Program.GetMemory() | Program.GetMemoryRightOf()));
-        }
+        Program.SetMemory((byte)(Program.GetMemory() | Program.GetMemoryRightOf()));
     }
 }

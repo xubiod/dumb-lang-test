@@ -1,33 +1,27 @@
 ﻿using dumb_lang_test.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace dumb_lang_test.Instructions.ArgumentRequired
+namespace dumb_lang_test.Instructions.ArgumentRequired;
+
+internal class Group : IInstruction<IBasicInstruction>
 {
-    class Group : IInstruction<IBasicInstruction>
+    private readonly List<IBasicInstruction> _grouped = new();
+
+    public void Execute()
     {
-        readonly List<IBasicInstruction> grouped = new();
-
-        public void Execute()
+        foreach (var instruction in _grouped)
         {
-            foreach (IBasicInstruction instruction in grouped)
-            {
-                instruction.Execute();
-                Program.AddCycles(3);
-            }
+            instruction.Execute();
+            Program.AddCycles(3);
         }
+    }
 
-        public void FillParameters(List<IBasicInstruction> parameters = null)
-        {
-            grouped.AddRange(parameters);
-        }
+    public void FillParameters(List<IBasicInstruction> parameters = null)
+    {
+        if (parameters != null) _grouped.AddRange(parameters);
+    }
 
-        public void AddParameter(IBasicInstruction parameter)
-        {
-            grouped.Add(parameter);
-        }
+    public void AddParameter(IBasicInstruction parameter)
+    {
+        _grouped.Add(parameter);
     }
 }

@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions.ArgumentRequired
+namespace dumb_lang_test.Instructions.ArgumentRequired;
+
+internal class JumpOffsetCoarse : IInstruction<sbyte>
 {
-    internal class JumpOffsetCoarse : Interfaces.IInstruction<sbyte>
+    private sbyte _lineOffset;
+
+    public void Execute()
     {
-        sbyte line_offset;
+        Program.InstructionPointer += _lineOffset * 128;
+    }
 
-        public void Execute()
-        {
-            Program.instruction_pointer += line_offset * 128;
-        }
+    public void FillParameters(List<sbyte> parameters = null)
+    {
+        if (parameters != null) _lineOffset = parameters[0];
+    }
 
-        public void FillParameters(List<sbyte> parameters = null)
-        {
-            line_offset = parameters[0];
-        }
-
-        public void SetParameter(sbyte parameter)
-        {
-            line_offset = parameter;
-        }
+    public void SetParameter(sbyte parameter)
+    {
+        _lineOffset = parameter;
     }
 }

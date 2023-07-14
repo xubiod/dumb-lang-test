@@ -1,134 +1,129 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test
+namespace dumb_lang_test;
+
+internal class Program
 {
-    class Program
+    public const int MemorySize = 256;
+
+    public static int MemoryPointer = 0;
+    public static bool Skip;
+    public static bool Halt = false;
+    public static int InstructionPointer;
+    public static readonly int SpecialIndex = 0xFF;
+
+    private static readonly byte[] Memory = new byte[MemorySize];
+    private static int _cycles;
+    private static readonly int MaxCycles = 500000;
+    private static string _program = "";
+
+    private static void Main(string[] args)
     {
-        public const int MEMORY_SIZE = 256;
-
-        public static int MemoryPointer = 0;
-        public static bool skip = false;
-        public static bool halt = false;
-        public static int instruction_pointer = 0;
-        public static readonly int special_index = 0xFF;
-
-        private static readonly byte[] memory = new byte[MEMORY_SIZE];
-        private static int cycles = 0;
-        private static readonly int max_cycles = 500000;
-        private static string program = "";
-
-        static void Main(string[] args)
+        switch (args[0].ToLower())
         {
-            switch (args[0].ToLower())
+            case "parse":
             {
-                case "parse":
-                    {
-                        args = args.Skip(1).ToArray();
-                        program = string.Join(' ', args);
-                        break;
-                    }
-                case "file":
-                    {
-                        args = args.Skip(1).ToArray();
-                        string filename = string.Join(' ', args);
-                        program = File.ReadAllText(filename);
-
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
+                args = args.Skip(1).ToArray();
+                _program = string.Join(' ', args);
+                break;
             }
-
-            int _;
-            for (_ = 0; _ < memory.Length; _++)
+            case "file":
             {
-                memory[_] = 0x00;
-            }
+                args = args.Skip(1).ToArray();
+                var filename = string.Join(' ', args);
+                _program = File.ReadAllText(filename);
 
-            List<Interfaces.IBasicInstruction> instructions = StringParser.ParseString(program);
-
-            DateTime _start = DateTime.Now;
-
-            for (instruction_pointer = 0; (instruction_pointer < instructions.Count) && cycles < max_cycles && !halt; instruction_pointer++)
-            {
-                if (!skip) instructions[instruction_pointer].Execute();
-                else skip = false;
-                cycles++;
-            }
-
-            TimeSpan exec_time = DateTime.Now - _start;
-
-            PrintFullMem();
-            System.Console.WriteLine("{0:D} out of {1} maximum cycles\nTook {2} ticks ({3}ms)", cycles, max_cycles, exec_time.Ticks, exec_time.TotalMilliseconds);
-        }
-
-        public static void SetMemory(byte memory)
-        {
-            Program.memory[MemoryPointer] = memory;
-        }
-
-        public static void SetMemorySpecial(byte memory)
-        {
-            Program.memory[special_index] = memory;
-        }
-
-        public static void ShiftMemory(byte shift)
-        {
-            memory[MemoryPointer] += shift;
-        }
-
-        public static byte GetMemory() => memory[MemoryPointer];
-
-        public static byte GetMemoryRightOf() => memory[(MemoryPointer + 1) % MEMORY_SIZE];
-
-        public static byte GetMemoryLeftOf() => memory[MemoryPointer - 1  == -1 ? 255 : MemoryPointer - 1];
-
-        public static byte GetMemorySpecial() => memory[special_index];
-
-        public static void PrintFullMem()
-        {
-            System.Console.WriteLine("Memory readout ({0:D} bytes)", MEMORY_SIZE);
-
-            var default_fcolor = Console.ForegroundColor;
-            var default_bcolor = Console.BackgroundColor;
-
-            System.Console.Write("     ");
-            for (int k = 0; k < 16; k++)
-            {
-                System.Console.Write(" x{0:X}", k);
-            }
-            System.Console.WriteLine();
-
-            for (int i = 0; i < (MEMORY_SIZE / 16); i++)
-            {
-                System.Console.Write("  {0:X}x ", i);
-                for (int j = 0; j < 16; j++)
-                {
-                    Console.ForegroundColor = (i * 16) + j == special_index ? ConsoleColor.White : (i * 16) + j == MemoryPointer ? ConsoleColor.White : default_fcolor;
-                    Console.BackgroundColor = (i * 16) + j == special_index ? ConsoleColor.DarkMagenta : (i * 16) + j == MemoryPointer ? ConsoleColor.DarkGreen : default_bcolor;
-                    System.Console.Write(" {0,2:X}", (int)memory[(i * 16) + j]);
-
-                    Console.ForegroundColor = default_fcolor;
-                    Console.BackgroundColor = default_bcolor;
-                }
-
-                System.Console.WriteLine("  {0:X}x", i);
+                break;
             }
         }
 
-        public static void PrintMemoryPtrDetail()
+        int _;
+        for (_ = 0; _ < Memory.Length; _++)
         {
-            Console.Write("[{0:X}] @ mp {1:X} ", memory[MemoryPointer], MemoryPointer);
+            Memory[_] = 0x00;
         }
 
-        public static void AddCycles(int cycles)
+        var instructions = StringParser.ParseString(_program);
+
+        var start = DateTime.Now;
+
+        for (InstructionPointer = 0; InstructionPointer < instructions.Count && _cycles < MaxCycles && !Halt; InstructionPointer++)
         {
-            Program.cycles += cycles;
+            if (!Skip) instructions[InstructionPointer].Execute();
+            else Skip = false;
+            _cycles++;
         }
+
+        var execTime = DateTime.Now - start;
+
+        PrintFullMem();
+        Console.WriteLine("{0:D} out of {1} maximum cycles\nTook {2} ticks ({3}ms)", _cycles, MaxCycles, execTime.Ticks, execTime.TotalMilliseconds);
+    }
+
+    public static void SetMemory(byte memory)
+    {
+        Memory[MemoryPointer] = memory;
+    }
+
+    public static void SetMemorySpecial(byte memory)
+    {
+        Memory[SpecialIndex] = memory;
+    }
+
+    public static void ShiftMemory(byte shift)
+    {
+        Memory[MemoryPointer] += shift;
+    }
+
+    public static byte GetMemory() => Memory[MemoryPointer];
+
+    public static byte GetMemoryRightOf() => Memory[(MemoryPointer + 1) % MemorySize];
+
+    public static byte GetMemoryLeftOf() => Memory[MemoryPointer - 1  == -1 ? 255 : MemoryPointer - 1];
+
+    public static byte GetMemorySpecial() => Memory[SpecialIndex];
+
+    public static void PrintFullMem()
+    {
+        Console.WriteLine("Memory readout ({0:D} bytes)", MemorySize);
+
+        var defaultFcolor = Console.ForegroundColor;
+        var defaultBcolor = Console.BackgroundColor;
+
+        Console.Write("     ");
+        for (var k = 0; k < 16; k++)
+        {
+            Console.Write(" x{0:X}", k);
+        }
+        Console.WriteLine();
+
+        for (var i = 0; i < MemorySize / 16; i++)
+        {
+            Console.Write("  {0:X}x ", i);
+            for (var j = 0; j < 16; j++)
+            {
+                Console.ForegroundColor = i * 16 + j == SpecialIndex ? ConsoleColor.White : i * 16 + j == MemoryPointer ? ConsoleColor.White : defaultFcolor;
+                Console.BackgroundColor = i * 16 + j == SpecialIndex ? ConsoleColor.DarkMagenta : i * 16 + j == MemoryPointer ? ConsoleColor.DarkGreen : defaultBcolor;
+                Console.Write(" {0,2:X}", (int)Memory[i * 16 + j]);
+
+                Console.ForegroundColor = defaultFcolor;
+                Console.BackgroundColor = defaultBcolor;
+            }
+
+            Console.WriteLine("  {0:X}x", i);
+        }
+    }
+
+    public static void PrintMemoryPtrDetail()
+    {
+        Console.Write("[{0:X}] @ mp {1:X} ", Memory[MemoryPointer], MemoryPointer);
+    }
+
+    public static void AddCycles(int cycles)
+    {
+        _cycles += cycles;
     }
 }

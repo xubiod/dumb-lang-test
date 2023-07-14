@@ -1,40 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions.ArgumentRequired
+namespace dumb_lang_test.Instructions.ArgumentRequired;
+
+internal class Addi : IInstruction<byte>
 {
-    class Addi : Interfaces.IInstruction<byte>
+    private readonly List<byte> _values = new();
+
+    public Addi()
     {
-        readonly List<byte> immediates = new();
+    }
 
-        public Addi()
-        {
-            return;
-        }
+    public Addi(List<byte> values)
+    {
+        _values = values;
+    }
 
-        public Addi(List<byte> immediates)
-        {
-            this.immediates = immediates;
-        }
+    public void Execute()
+    {
+        var result = Program.GetMemory();
 
-        public void Execute()
-        {
-            byte result = Program.GetMemory();
+        result = _values.Aggregate(result, (current, number) => (byte)(current + number));
 
-            foreach (byte number in immediates)
-            {
-                result += number;
-            }
+        Program.SetMemory(result);
+    }
 
-            Program.SetMemory(result);
-        }
-
-        public void FillParameters(List<byte> parameters = null)
-        {
-            immediates.AddRange(parameters);
-        }
+    public void FillParameters(List<byte> parameters = null)
+    {
+        if (parameters != null) _values.AddRange(parameters);
     }
 }

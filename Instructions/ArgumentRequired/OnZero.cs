@@ -1,37 +1,31 @@
-﻿using dumb_lang_test.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using dumb_lang_test.Interfaces;
 
-namespace dumb_lang_test.Instructions.ArgumentRequired
+namespace dumb_lang_test.Instructions.ArgumentRequired;
+
+internal class OnZero : IInstruction<IBasicInstruction>
 {
-    class OnZero : IInstruction<IBasicInstruction>
+    public readonly List<IBasicInstruction> ExecutedOnSuccess = new();
+
+    public OnZero()
     {
-        public List<IBasicInstruction> ExecutedOnSuccess = new();
+    }
 
-        public OnZero()
-        {
-            return;
-        }
+    public OnZero(IBasicInstruction toRunOnZero)
+    {
+        ExecutedOnSuccess.Add(toRunOnZero);
+    }
 
-        public OnZero(IBasicInstruction toRunOnZero)
+    public void Execute()
+    {
+        if (Program.GetMemory() == 0)
         {
-            ExecutedOnSuccess.Add(toRunOnZero);
+            ExecutedOnSuccess[0].Execute();
         }
+    }
 
-        public void Execute()
-        {
-            if (Program.GetMemory() == 0)
-            {
-                ExecutedOnSuccess[0].Execute();
-            }
-        }
-
-        public void FillParameters(List<IBasicInstruction> parameters = null)
-        {
-            throw new NotImplementedException();
-        }
+    public void FillParameters(List<IBasicInstruction> parameters = null)
+    {
+        throw new NotImplementedException();
     }
 }
